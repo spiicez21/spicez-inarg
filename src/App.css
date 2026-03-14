@@ -1,0 +1,276 @@
+/* ── Crow black & Olive palette ─────────────────────────────────── */
+:root {
+  --crow:        #0b0c0a;
+  --olive:       #6b7536;
+  --olive-light: #8c9b47;
+  --olive-dim:   rgba(107, 117, 54, 0.18);
+  --cream:       #e8e4d4;
+  --cream-muted: #9a9580;
+}
+
+/* ── Font faces ──────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/Fonts/ClashDisplay-Variable.ttf') format('truetype');
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/Fonts/ClashDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/Fonts/ClashDisplay-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/Fonts/ClashDisplay-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/Fonts/ClashDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/Fonts/ClashDisplay-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('/Fonts/ClashDisplay-Extralight.ttf') format('truetype');
+  font-weight: 200;
+  font-display: swap;
+}
+
+/* ── Reset ───────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--crow);
+  font-family: 'ClashDisplay', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  all: unset;
+  display: block;
+}
+
+/* ── Page shell ──────────────────────────────────────────────────── */
+.dev-page {
+  min-height: 100svh;
+  background: var(--crow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* radial olive glow behind content */
+.dev-page::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70vw;
+  height: 60vh;
+  background: radial-gradient(ellipse at center, rgba(107, 117, 54, 0.08) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* grain texture */
+.noise {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Content ─────────────────────────────────────────────────────── */
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 48px 24px;
+  text-align: center;
+}
+
+/* ── Logo ────────────────────────────────────────────────────────── */
+.logo-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.peel-logo {
+  width: clamp(180px, 32vw, 400px);
+  height: auto;
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 0 48px rgba(107, 117, 54, 0.22))
+          drop-shadow(0 24px 60px rgba(0, 0, 0, 0.6));
+}
+
+.logo-glow {
+  position: absolute;
+  width: 60%;
+  height: 40%;
+  bottom: -10%;
+  background: radial-gradient(ellipse, rgba(107, 117, 54, 0.2) 0%, transparent 70%);
+  filter: blur(20px);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* ── Text block ──────────────────────────────────────────────────── */
+.text-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  max-width: 640px;
+}
+
+.heading {
+  font-family: 'ClashDisplay', sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 4.2vw, 56px);
+  line-height: 1.02;
+  letter-spacing: -2px;
+  color: var(--cream);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.heading-accent {
+  color: var(--olive-light);
+}
+
+/* ── Grid lines overlay ──────────────────────────────────────────── */
+.grid-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* horizontal rules */
+.gl-h {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(140, 155, 71, 0.18);
+}
+.gl-h1 { top: 6%; }
+.gl-h2 { bottom: 6%; top: auto; }
+
+/* intersection boxes on horizontal rules */
+.gl-h .gl-box {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border: 1px solid rgba(140, 155, 71, 0.55);
+  background: var(--crow);
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.gl-h .gl-box:nth-child(1) { left: 0%; }
+.gl-h .gl-box:nth-child(2) { left: 8%; }
+.gl-h .gl-box:nth-child(3) { left: 92%; }
+.gl-h .gl-box:nth-child(4) { left: 100%; }
+
+/* vertical side rules */
+.gl-v {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(140, 155, 71, 0.12);
+}
+.gl-v-left  { left: 8%; }
+.gl-v-right { right: 8%; }
+
+.sub {
+  font-family: 'ClashDisplay', sans-serif;
+  font-weight: 300;
+  font-size: clamp(14px, 1.8vw, 17px);
+  line-height: 1.75;
+  color: var(--cream-muted);
+  letter-spacing: 0.1px;
+  max-width: 500px;
+}
+
+/* ── Status badge ────────────────────────────────────────────────── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(107, 117, 54, 0.35);
+  background: var(--olive-dim);
+  color: var(--olive-light);
+  font-family: 'ClashDisplay', sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border-radius: 0;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  background: var(--olive-light);
+  border-radius: 50%;
+  animation: pulse 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(140, 155, 71, 0.55); }
+  60%  { box-shadow: 0 0 0 8px rgba(140, 155, 71, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(140, 155, 71, 0); }
+}
+
+/* ── Footer ──────────────────────────────────────────────────────── */
+.footer {
+  position: relative;
+  z-index: 1;
+  padding: 24px;
+  font-family: 'ClashDisplay', sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+  color: var(--cream-muted);
+  letter-spacing: 0.4px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  opacity: 0.45;
+}
+
+.divider { opacity: 0.4; }
